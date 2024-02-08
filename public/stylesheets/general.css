@@ -1,0 +1,33 @@
+:root {
+    --colorFondo :#FFFFF7;
+    --colorFondoClaro: #fbfbeb;
+    --colorFondoOscuro: #e2e2d4;
+    --colorGris:#c9c9bc;
+    --colorGrisClaro:#b5b5a9;
+    --colorGrisOscuro: #a3a398;
+    --fuente1: 'Quicksand', sans-serif;
+    --fuente2: 'Righteous', cursive;
+    --fuente3: 'Source Sans 3', sans-serif;
+
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0;
+}
+
+
+body{
+    background-color: var(--colorFondo);
+}
+
+li{
+    list-style-type: none;
+    color: #0c0c0c;
+}
+
+a{
+    text-decoration: none;
+    color: #0f0d0d;
+}
