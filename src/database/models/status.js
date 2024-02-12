@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Status.associate = (models)=>{
         Status.hasMany(models.Task,{
-          as: "status",
+          as: "tasks",
           foreignKey : "statusId"
         })
       }

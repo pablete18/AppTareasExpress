@@ -12,14 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Task.associate = (modelos)=>{
         Task.belongsTo(models.Status,{
-          as:"status",
+          as:"tasks",
           foreignKey: "statusId"
         })
       }
     }
   }
   Task.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    statusId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Task',

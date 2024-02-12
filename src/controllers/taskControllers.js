@@ -11,9 +11,9 @@ module.exports = {
                 order : ["name"]
             })
         ])
-        .then(([task,statuses])=>{
+        .then(([tasks,statuses])=>{
             res.render("index",{
-                task,
+                tasks,
                 statuses
             })
         })
@@ -21,5 +21,38 @@ module.exports = {
             console.log(error)
         })
 
+    },
+    createTask : (req,res)=>{
+        const {name,status}= req.body
+        db.Task.create({
+            name : name,
+            statusId : status
+        })
+        .then(response => {
+            return res.redirect("/home");
+          })
+          .catch((error) => {console.log(error);});
+        
+    },
+    listTasks:async (req,res)=>{
+        try {
+           
+            const taskes= await db.Task.findAll({
+                    order:["name"]
+                }               
+                )
+            const statuses = await db.Status.findAll({
+                    order : ["name"]
+                })
+            
+            
+             return res.render("index",{
+                    taskes,
+                    statuses
+            })
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
