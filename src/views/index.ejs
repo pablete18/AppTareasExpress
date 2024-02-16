@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tus tareas</title>
-<!--     <link rel="stylesheet" href="./../../public/stylesheets/style.css"> -->
+    <title>Tus tareas</title>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/styles.css"> 
     <script src="https://kit.fontawesome.com/80f37fa8b2.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="body__div">
-      <h1>Tus tareas</h1>
+      <h1 class="body__div__h1">Tus tareas</h1>
       <h3>Organiza tus tareas en esta plataforma</h3>
       <div class="container tex-center">
         <div class = "row align-items-start">
     <!-- Button trigger modal -->
-<button type="button" class="col-md-4 btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="col-md-4 btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
  Agregar Tarea
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -44,27 +44,49 @@
     </div>
   </div>
 </div>
-<table class="table">
+<table class="table container-fluid">
   <thead>
-    <tr>
-      
+    <tr class="col-12">
       <th scope="col">#</th>
-      <% statuses.forEach(status => { %>
-        <th scope="col"><%= status.name %>
+        <th scope="col-5">Pendiente
         </th>
-      <% }) %>
-      
+        <th scope="col-4">en proceso
+        </th>
+        <th scope="col-5">terminado
+        </th>
       
     </tr>
   </thead>
   <tbody>
     <tr>
-        <% taskes.forEach(task => { %>
-        <th scope="row">1</th>
-        <td><%= task.name %></td>
-      <% }) %>       
-      
+      <th scope="row">
+       <% for( let i = 0; i < taskes.length; i++ ) { %>           
+            <% if (taskes[i].statusId === 1){ %>
+              <td class="col order-first">
+                <ul class="col-sm-3">
+                  <li><%= taskes[i].name %></li>
+                </ul>
+              </td>        
+            <% }%>
+       <% } %>
+      </th>
+       <th scope="row">
+       <% for( let i = 0; i < taskes.length; i++ ) { %>           
+        <% if (taskes[i].statusId === 2){ %>
+          <td class="col"><%= taskes[i].name %></td>        
+        <% } %>
+   <% } %>
+  </th>
+  <th scope="row">
+    <% for( let i = 0; i < taskes.length; i++ ) { %>           
+    <% if (taskes[i].statusId === 3){ %>
+      <td class="col order-last"><%= taskes[i].name %></td>        
+    <% } %>
+  <% } %>
+</th>
+
     </tr>
+    
    
   </tbody>
 </table>

@@ -54,5 +54,23 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
+    },
+    update : (req,res)=>{
+        const id = req.params.id
+        const {name,status}= req.body
+
+        db.Task.update({
+            name : name,
+            statusId : status
+        },
+        {
+            where : {id : id}
+        })
+    },
+    destroy : (req,res)=>{
+        const id = req.params.id;
+        db.Task.destroy({
+            where : {id : id}
+        })
     }
 }
