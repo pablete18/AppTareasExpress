@@ -9,3 +9,30 @@
     margin-top: 10px;
     box-shadow: inset;
 }
+p{
+    font-size: 20px;
+}
+h5{
+    text-align: left;
+    margin:10px 200px 10px 0px;
+    padding: 10px;
+    background-color: var(--colorFondoOscuro);
+    border-bottom: 3px solid ;
+}
+.section__article{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    border-color: 3px solid;
+}
+.section__article__p{    
+    background-color: var(--colorFondoClaro);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--colorGrisOscuro);   
+    
+}
+.section__article__p:hover{
+    border: 2px solid var(--colorGrisOscuro)
+
+}

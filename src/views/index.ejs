@@ -44,62 +44,72 @@
     </div>
   </div>
 </div>
-<table class="table container-fluid">
-  <thead>
-    <tr class="col-12">
-      <th scope="col">#</th>
-        <th scope="col-5">Pendiente
-        </th>
-        <th scope="col-4">en proceso
-        </th>
-        <th scope="col-5">terminado
-        </th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">
-       <% for( let i = 0; i < taskes.length; i++ ) { %>           
-            <% if (taskes[i].statusId === 1){ %>
-              <td class="col order-first">
-                <ul class="col-sm-3">
-                  <li><%= taskes[i].name %></li>
-                </ul>
-              </td>        
-            <% }%>
-       <% } %>
-      </th>
-       <th scope="row">
-       <% for( let i = 0; i < taskes.length; i++ ) { %>           
-        <% if (taskes[i].statusId === 2){ %>
-          <td class="col"><%= taskes[i].name %></td>        
-        <% } %>
-   <% } %>
-  </th>
-  <th scope="row">
+<section class="table container-fluid">
+  
+    <h5 class="section__table__h4">Pendiente</h5>
+    <article class="section__article">
     <% for( let i = 0; i < taskes.length; i++ ) { %>           
-    <% if (taskes[i].statusId === 3){ %>
-      <td class="col order-last"><%= taskes[i].name %></td>        
+         <% if (taskes[i].statusId === 1){ %>         
+               <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>       
+         <% }%>
     <% } %>
-  <% } %>
-</th>
-
-    </tr>
-    
+  </article>
    
-  </tbody>
-</table>
-                   
-           
-            
-          
-         
+  <h5 class="div__table__h4">En Proceso</h5>
+   <article class="section__article">
+    <% for( let i = 0; i < taskes.length; i++ ) { %>           
+      <% if (taskes[i].statusId === 2){ %>
+        <p class = "section__article__p" id="p__task"><%= taskes[i].name %></p>        
+      <% } %>
+ <% } %>
+   </article>
+
+  <h5 class="div__table__h4">Terminada</h5>
+  <article class="section__article">
+    <% for( let i = 0; i < taskes.length; i++ ) { %>           
+      <% if (taskes[i].statusId === 3){ %>
+        <p class = "section__article__p" id="p__task"><%= taskes[i].name %></p>        
+      <% } %>
+    <% } %>
+  </article>
+  <!-- Modal -->
+  <% taskes.forEach(task => { %>
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="updateModalLabel">Editar tarea</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        
+          <form method="POST" action="/home/<%= task.id %>?_method=PUT" >
+            <div class="modal-body">        
+              <input type="text"name="name" id="name" value="<%= task.name %>">
+              <select name="status"id="status">
+                <option value="" selected hidden>Seleccione estado...</option>
+              <% statuses.forEach(status => { %>            
+                    <option value="<%= status.id %>" name="status"><%= status.name %></option>           
+              <% }) %>
+              </select>
+             </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <form action="/home/<%= task.id %>?_method=DELETE"
+              method="POST">
+              <button type="submit"class="btn btn-danger" name="delete">ELIMINAR</button>
+    
+          </div>
+        </form>    
         </div>
-        
-          
+      </div>
+    </div>
+  <% }) %>
+
+  </section>
+      
+          </div>        
+        </div>      
+         
       </div>
      
     </div>
