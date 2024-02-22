@@ -57,9 +57,9 @@
    
   <h5 class="div__table__h4">En Proceso</h5>
    <article class="section__article">
-    <% for( let i = 0; i < taskes.length; i++ ) { %>           
+    <%for( let i = 0; i < taskes.length; i++ ) { %>           
       <% if (taskes[i].statusId === 2){ %>
-        <p class = "section__article__p" id="p__task"><%= taskes[i].name %></p>        
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>        
       <% } %>
  <% } %>
    </article>
@@ -68,9 +68,9 @@
   <article class="section__article">
     <% for( let i = 0; i < taskes.length; i++ ) { %>           
       <% if (taskes[i].statusId === 3){ %>
-        <p class = "section__article__p" id="p__task"><%= taskes[i].name %></p>        
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>        
       <% } %>
-    <% } %>
+    <%} %>
   </article>
   <!-- Modal -->
   <% taskes.forEach(task => { %>
@@ -81,7 +81,7 @@
             <h1 class="modal-title fs-5" id="updateModalLabel">Editar tarea</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form method="POST" action="/home/<%= task.id %>?_method=PUT" >
+          <form method="POST"action="/home/<%= task.id %>?_method=PUT">
             <div class="modal-body">        
               <input type="text"name="name" id="name" value="<%= task.name %>">
               <select name="status"id="status">

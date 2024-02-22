@@ -55,22 +55,37 @@ module.exports = {
             console.log(error)
         }
     },
-    update : (req,res)=>{
-        const id = req.params.id
-        const {name,status}= req.body
-
-        db.Task.update({
-            name : name,
-            statusId : status
-        },
-        {
-            where : {id : id}
-        })
+    update : async(req,res)=>{
+        try {
+            const taskId = req.params.id
+            const {name,status}= req.body
+    
+            db.Task.update({
+                name : name,
+                statusId : status
+            },
+            {
+                where : {id : taskId}
+            })
+            res.redirect('/home')
+            
+        } catch (error) {
+            console.log('error al editar el producto');
+        }
+       
     },
-    destroy : (req,res)=>{
-        const id = req.params.id;
-        db.Task.destroy({
-            where : {id : id}
-        })
+    destroy : async(req,res)=>{
+        try {
+            const taskId = req.params.id;
+            db.Task.destroy({
+                where : {id : taskId}
+            });
+            res.redirect('/home')
+            
+        } catch (error) {
+            console.log(error);
+        }
+       
+
     }
 }
