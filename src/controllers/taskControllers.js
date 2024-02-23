@@ -60,14 +60,14 @@ module.exports = {
             const taskId = req.params.id
             const {name,status}= req.body
     
-            db.Task.update({
+           await db.Task.update({
                 name : name,
                 statusId : status
             },
             {
                 where : {id : taskId}
-            })
-            res.redirect('/home')
+            });
+           return res.redirect('/home')
             
         } catch (error) {
             console.log('error al editar el producto');
@@ -77,10 +77,10 @@ module.exports = {
     destroy : async(req,res)=>{
         try {
             const taskId = req.params.id;
-            db.Task.destroy({
+          await db.Task.destroy({
                 where : {id : taskId}
             });
-            res.redirect('/home')
+           return res.redirect('/home')
             
         } catch (error) {
             console.log(error);
