@@ -50,7 +50,7 @@
     <article class="section__article">
     <% for( let i = 0; i < taskes.length; i++ ) { %>           
          <% if (taskes[i].statusId === 1){ %>         
-               <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>       
+               <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=taskes[i].id%>"><%= taskes[i].name %></p>       
          <% }%>
     <% } %>
   </article>
@@ -59,7 +59,7 @@
    <article class="section__article">
     <%for( let i = 0; i < taskes.length; i++ ) { %>           
       <% if (taskes[i].statusId === 2){ %>
-        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>        
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%= taskes[i].id%>"><%= taskes[i].name %></p>        
       <% } %>
  <% } %>
    </article>
@@ -68,13 +68,13 @@
   <article class="section__article">
     <% for( let i = 0; i < taskes.length; i++ ) { %>           
       <% if (taskes[i].statusId === 3){ %>
-        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal"><%= taskes[i].name %></p>        
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=taskes[i].id%>"><%= taskes[i].name %></p>        
       <% } %>
     <%} %>
   </article>
   <!-- Modal -->
   <% taskes.forEach(task => { %>
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateModal<%= task.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -91,19 +91,19 @@
               <% }) %>
               </select>
              </div>
-          <div class="modal-footer">
+           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <form action="/home/<%= task.id %>?_method=DELETE"
-              method="POST">
-              <button type="submit"class="btn btn-danger" name="delete">ELIMINAR</button>
-    
+          </form>
+          <form action="/home/<%= task.id %>?_method=DELETE"method="POST">
+              <button type="submit" class="btn btn-danger" data-bs-target="#exampleModalToggle2<%= task.id %>" data-bs-toggle="modal"name ="delete">ELIMINAR</button>
+            </form>
           </div>
-        </form>    
         </div>
       </div>
     </div>
   <% }) %>
+  
 
   </section>
       

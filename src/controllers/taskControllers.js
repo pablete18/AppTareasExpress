@@ -70,7 +70,7 @@ module.exports = {
            return res.redirect('/home')
             
         } catch (error) {
-            console.log('error al editar el producto');
+            console.log('error al editar la tarea');
         }
        
     },
@@ -83,7 +83,7 @@ module.exports = {
            return res.redirect('/home')
             
         } catch (error) {
-            console.log(error);
+            console.log('error al eliminar la tarea');
         }
        
 
