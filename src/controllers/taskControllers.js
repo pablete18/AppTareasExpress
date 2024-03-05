@@ -1,7 +1,9 @@
 const db = require("../database/models")
+const {validationResult} = require('express-validator')
 
 module.exports = {
     create : (req,res)=>{
+        
         Promise.all ([
             db.Task.findAll({
                 order:["name"]
@@ -11,9 +13,9 @@ module.exports = {
                 order : ["name"]
             })
         ])
-        .then(([tasks,statuses])=>{
+        .then(([taskes,statuses])=>{
             res.render("index",{
-                tasks,
+                taskes,
                 statuses
             })
         })
@@ -21,19 +23,7 @@ module.exports = {
             console.log(error)
         })
 
-    },
-    createTask : (req,res)=>{
-        const {name,status}= req.body
-        db.Task.create({
-            name : name,
-            statusId : status
-        })
-        .then(response => {
-            return res.redirect("/home");
-          })
-          .catch((error) => {console.log(error);});
-        
-    },
+    }, 
     listTasks:async (req,res)=>{
         try {
            
@@ -55,6 +45,47 @@ module.exports = {
             console.log(error)
         }
     },
+    createTask : (req,res)=>{
+        let errors = validationResult(req)
+        if(errors.isEmpty()){
+            const {name,status}= req.body
+        
+            db.Task.create({
+                name : name,
+                statusId : status
+            })
+            .then(response => {
+                return res.redirect("/home");
+              })
+            .catch((error) => {console.log(error);});
+            
+
+        }else{
+        
+            Promise.all ([
+                db.Task.findAll({
+                    order:["name"]
+                }               
+                ),
+                db.Status.findAll({
+                    order : ["name"]
+                })
+            ])
+            .then(([taskes,statuses])=>{
+                res.render("index",{
+                    taskes,
+                    statuses,
+                    errors : errors.array(),
+                    old :req.body,
+                })
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+        }
+       
+    },
+   
     update : async(req,res)=>{
         try {
             const taskId = req.params.id
