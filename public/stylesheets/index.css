@@ -36,3 +36,6 @@ h5{
     border: 2px solid var(--colorGrisOscuro)
 
 }
+#box-errors li{
+    color : red
+}

@@ -87,22 +87,44 @@ module.exports = {
     },
    
     update : async(req,res)=>{
-        try {
-            const taskId = req.params.id
-            const {name,status}= req.body
-    
-           await db.Task.update({
-                name : name,
-                statusId : status
-            },
-            {
-                where : {id : taskId}
-            });
-           return res.redirect('/home')
-            
-        } catch (error) {
-            console.log('error al editar la tarea');
+        let errors = validationResult(req)
+        if(errors.isEmpty()){
+            try {
+                const taskId = req.params.id
+                const {name,status}= req.body
+        
+               await db.Task.update({
+                    name : name,
+                    statusId : status
+                },
+                {
+                    where : {id : taskId}
+                });
+               return res.redirect('/home')
+                
+            } catch (error) {
+                console.log('error al editar la tarea');
+            }
+        }else{
+            try {
+                const taskes =  await db.Task.findAll({
+                    order : ["name"]
+                })
+                const statuses = await db.Status.findAll(
+                {order : ['name']}
+            )
+                res.render('index',{
+                    taskes,
+                    statuses,
+                    errors : errors.array(),
+                    old :req.body
+                })
+            } catch (error) {
+                console.log('error al editar la tarea')
+            }
+          
         }
+       
        
     },
     destroy : async(req,res)=>{
