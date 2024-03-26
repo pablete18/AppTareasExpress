@@ -39,3 +39,8 @@ h5{
 #box-errors li{
     color : red
 }
+
+#box-errors-edit li{
+    color: red
+
+}

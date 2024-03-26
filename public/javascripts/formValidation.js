@@ -28,11 +28,12 @@
     });
     
     $('form-edit').addEventListener('submit',function(event){
-      console.log('q onda????')
+      
       event.preventDefault()
       
    let erroresEdit = [];
       if($('statusEdit').value === ""){
+        
           erroresEdit.push('Debe seleccionar un estado de tarea')
       }
     
