@@ -18,7 +18,11 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      password : {
+        type : Sequelize.STRING
+      },
       taskId:{
+        defaultValue: 0,
         allowNull : false,
         type :Sequelize.INTEGER,
         reference: {

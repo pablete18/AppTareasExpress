@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('partials/head'/* ,{
+<%- include('partials/head' ,{
     title : 'register'
-} */) %>
+} )%>
 <body>
     <h2>Registrate</h2>
     <div>
-        <form action="/" method="get">
+        <form action="/register" method="POST">
             <label for="name">Nombre</label>
-            <input type="text" name ="name"placeholder="Nombre">
+            <input type="text" name ="name" value="<%= locals.old &&(old.name) %>">
             <label for="surname">Apellido</label>
-            <input type="text" name ="surname"placeholder="Apellido">
+            <input type="text" name ="surname" value =" <%= locals.old && (old.surname) %>">
             <label for="email">Email</label>
-            <input type="email" name ="email"placeholder="Email">
-            <button type = "submit">registrarme</button>
+            <input type="text" name ="email" value =" <%= locals.old && (old.email) %>">
+            <label for="password">Contraseña</label>
+            <input type="text" name ="password">
+            <button type="submit">registrarme</button>
+            <% if (locals.errors) { %>
+                <% errors.forEach(error => { %>
+                  <ul>
+                  <li style="color: red;"><%= error.msg %></li> 
+                </ul>            
+                <% }) %>
+              <% } %>
         </form>
     </div>
 </body>
