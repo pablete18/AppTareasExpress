@@ -8,11 +8,11 @@
     <div>
         <form action="/register" method="POST">
             <label for="name">Nombre</label>
-            <input type="text" name ="name" value="<%= locals.old &&(old.name) %>">
+            <input type="text" name ="name" value="<%=locals.old &&(old.name)%>">
             <label for="surname">Apellido</label>
-            <input type="text" name ="surname" value =" <%= locals.old && (old.surname) %>">
+            <input type="text" name ="surname" value ="<%=locals.old &&(old.surname)%>">
             <label for="email">Email</label>
-            <input type="text" name ="email" value =" <%= locals.old && (old.email) %>">
+            <input type="text" name ="email" value ="<%=locals.old &&(old.email)%>">
             <label for="password">Contraseña</label>
             <input type="text" name ="password">
             <button type="submit">registrarme</button>

@@ -1,4 +1,5 @@
 const {body} = require('express-validator')
+const db = require('../database/models')
 
 const registerValidation = [
     body('name')
@@ -18,6 +19,16 @@ const registerValidation = [
     .withMessage('el email es obligatorio')
     .isEmail()
     .withMessage('Debe ser un email valido')
+    .custom(async(email)=>{
+        const userInDb = await db.User.findOne({
+            where :{email}
+          })
+       
+        if(userInDb){
+            return Promise.reject('El email ya está en uso')            
+          }
+
+    })
     .bail(),
     body('password')
     .notEmpty()
