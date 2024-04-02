@@ -23,7 +23,7 @@ module.exports = {
             password :bcryptjs.hashSync(password,10)         
            })
    
-            return res.redirect('login')
+            return res.redirect('/')
            
          }
         catch (error) {
@@ -36,10 +36,53 @@ module.exports = {
     register : (req,res)=>{       
             return res.render("register")            
     },
+
     login: (req,res)=>{
+      console.log(req.session)
       return res.render('login')
-    }/* ,
-    processLogin:(req,res)=>{
+    },
+
+    processLogin:async(req,res)=>{
+     try {
+
+      const {email,password} = req.body
+
+      let userInDb = await db.User.findOne({
+        where: {email}
+      })
+
+      if(userInDb){        
+        req.session.userLogged = userInDb
+
+        let isOkPass = await bcryptjs.compare(password,userInDb.password)
+
+        if (isOkPass) {
+         return res.redirect('/home')
+        }
+        return res.render('login',{
+          errors:{
+            email:{
+              msg : "Credenciales invalidas"
+            }
+          }
+        })
+
+      }
+      return res.render('login',{
+        errors:{
+          email:{
+            msg : "No se enceuntra el mail en la base de datos"
+          }
+        }
+      })
+     }
+      catch (error) {
+      console.log(error)
       
-    }    */
+     } 
+    },
+    logOut : (req,res)=>{
+      req.session.destroy()
+      return res.redirect('/')
+    }     
     }

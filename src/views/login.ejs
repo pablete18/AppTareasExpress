@@ -8,10 +8,15 @@
     <h3>Ingresa para usar la aplicacion</h3>
     <div>
         <form action="/" method="POST">            
-            <label for="email">Email</label>
+            <label for="email">Email</label>            
             <input type="email" name ="email">
+            <% if (locals.errors && errors.email) { %>
+                <ul>
+                  <li style="color: red;"><%= errors.email.msg %></li> 
+                </ul>  
+            <% } %>
             <label for="password">Contraseña</label>
-            <input type="text" name="password" >
+            <input type="password" name="password" >
             <button type = "submit"value="login">Ingresa</button>
             <a href="/register">No tengo cuenta</a>
         </form>

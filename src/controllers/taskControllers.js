@@ -24,7 +24,7 @@ module.exports = {
         })
 
     }, 
-    listTasks:async (req,res)=>{
+    home:async (req,res)=>{
         try {
            
             const taskes= await db.Task.findAll({
@@ -36,7 +36,8 @@ module.exports = {
                 })
             
             
-             return res.render("index",{
+             return res.render("index",{   
+                    user : req.session.userLogged,            
                     taskes,
                     statuses
             })
