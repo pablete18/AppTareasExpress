@@ -21,7 +21,7 @@ module.exports = {
       password : {
         type : Sequelize.STRING
       },
-      taskId:{
+     /*  taskId:{
         defaultValue: 0,
         allowNull : false,
         type :Sequelize.INTEGER,
@@ -31,7 +31,7 @@ module.exports = {
           },
           key: "id"
         }
-      },
+      }, */
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -26,19 +26,24 @@ module.exports = {
     }, 
     home:async (req,res)=>{
         try {
-           
-            const taskes= await db.Task.findAll({
-                    order:["name"]
-                }               
-                )
+            const user = await db.User.findOne({
+                where : {
+                    id : req.session.userLogged.id
+                },
+                include : [
+                    {
+                        model:db.Task,
+                        as :"tasks"
+                    }
+                ]
+            })
             const statuses = await db.Status.findAll({
                     order : ["name"]
                 })
             
             
              return res.render("index",{   
-                    user : req.session.userLogged,            
-                    taskes,
+                    user,
                     statuses
             })
             
@@ -46,45 +51,56 @@ module.exports = {
             console.log(error)
         }
     },
-    createTask : (req,res)=>{
-        let errors = validationResult(req)
-        if(errors.isEmpty()){
-            const {name,status}= req.body
-        
-            db.Task.create({
-                name : name,
-                statusId : status
-            })
-            .then(response => {
-                return res.redirect("/home");
-              })
-            .catch((error) => {console.log(error);});
+    createTask : async(req,res)=>{
+        try {
+            let errors = validationResult(req) 
+            const user = await db.User.findOne({
+                where : {
+                    id : req.session.userLogged.id
+                }})
+                console.log(user.id)
+            if(errors.isEmpty()){
+                const {name,status}= req.body
             
-
-        }else{
+               await db.Task.create({
+                    name : name,
+                    statusId : status,
+                    userId : user.id
+                    
+                })
+                
+                
+                    return res.redirect("/home");
+                
+               
+                
+            }else{
         
-            Promise.all ([
-                db.Task.findAll({
-                    order:["name"]
-                }               
-                ),
-                db.Status.findAll({
-                    order : ["name"]
-                })
-            ])
-            .then(([taskes,statuses])=>{
-                res.render("index",{
-                    taskes,
-                    statuses,
-                    errors : errors.array(),
-                    old :req.body,
-                })
-            })
-            .catch(error=>{
-                console.log(error)
-            })
+                
+                 const taskes =  await db.Task.findAll({
+                        order:["name"]
+                    }               
+                    )
+                  const statuses= await db.Status.findAll({
+                        order : ["name"]
+                    })
+               
+                
+                   return res.render("index",{
+                        taskes,
+                        statuses,
+                        errors : errors.array(),
+                        old :req.body,
+                    })
+             
+            }
+           
+            
+        } catch (error) {
+            console.log(error);
         }
        
+      
     },
    
     update : async(req,res)=>{

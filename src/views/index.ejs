@@ -54,32 +54,47 @@
   
     <h5 class="section__table__h4">Pendiente</h5>
     <article class="section__article">
-    <% for( let i = 0; i < taskes.length; i++ ) { %>           
-         <% if (taskes[i].statusId === 1){ %>         
-               <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=taskes[i].id%>"><%= taskes[i].name %></p>       
+      <% if (user && user.tasks && user.tasks.length > 0) { %>
+       
+      
+    <% for( let i = 0; i < user.tasks.length; i++ ) { %>           
+         <% if (user.tasks[i].statusId === 1){ %>         
+               <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=user.tasks[i].id%>"><%= user.tasks[i].name %></p>       
          <% }%>
     <% } %>
+    <% }else{ %>
+      <p>No tienes tareas Pendientes</p>
+      <% } %>
   </article>
    
   <h5 class="div__table__h4">En Proceso</h5>
    <article class="section__article">
-    <%for( let i = 0; i < taskes.length; i++ ) { %>           
-      <% if (taskes[i].statusId === 2){ %>
-        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%= taskes[i].id%>"><%= taskes[i].name %></p>        
+    <% if (user && user.tasks && user.tasks.length > 0) { %>
+    <%for( let i = 0; i < user.tasks.length; i++ ) { %>           
+      <% if (user.tasks[i].statusId === 2){ %>
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%= user.tasks[i].id%>"><%= user.tasks[i].name %></p>        
       <% } %>
  <% } %>
+ <% }else{ %>
+  <p>No tienes tareas en Proceso</p>
+  <% } %>
    </article>
 
   <h5 class="div__table__h4">Terminada</h5>
   <article class="section__article">
-    <% for( let i = 0; i < taskes.length; i++ ) { %>           
-      <% if (taskes[i].statusId === 3){ %>
-        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=taskes[i].id%>"><%= taskes[i].name %></p>        
+    <% if (user && user.tasks && user.tasks.length > 0) { %>
+    <% for( let i = 0; i < user.tasks.length; i++ ) { %>           
+      <% if (user.tasks[i].statusId === 3){ %>
+        <p class = "section__article__p" id="p__task"data-bs-toggle="modal" data-bs-target="#updateModal<%=user.tasks[i].id%>"><%= user.tasks[i].name %></p>        
       <% } %>
     <%} %>
+    <% }else{ %>
+      <p>No tienes tareas terminadas</p>
+      <% } %>
   </article>
   <!-- Modal Update & Delete-->
-  <% taskes.forEach(task => { %>
+  <% if (user && user.tasks && user.tasks.length > 0) { %>
+  <% user.tasks.forEach(task => { %>
     <div class="modal fade" id="updateModal<%= task.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -120,7 +135,7 @@
       </div>
     </div>
   <% }) %>
-  
+  <% } %>
 
   </section>
       
