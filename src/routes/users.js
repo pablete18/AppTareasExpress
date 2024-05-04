@@ -11,6 +11,6 @@ router.get('/',login);
 router.post('/',loginValidation,processLogin) 
 router.get('/register',guestMiddleware, register);
 router.post('/register',registerValidation,createUser)
-router.get('/home',logOut)
+router.get('/logout',logOut)
 
 module.exports = router;

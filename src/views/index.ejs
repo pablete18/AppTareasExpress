@@ -5,7 +5,12 @@
     <div class="body__div">
       <h1 class="body__div__h1">Tus tareas</h1>
       <h3>Organiza tus tareas en esta plataforma</h3>
-      <h4>Hola <%=user.name%>!!!</h4>      
+      <h4>Hola <%=user.name%>!!!</h4>
+      <a href="/logout">
+      <label for="log-out">salir</label>
+      <button type="submit" name="log-out">
+      <i class="fa-regular fa-arrow-right-from-bracket"></i>
+      </button></a>      
       <div class="container tex-center">
         <div class = "row align-items-start">
     <!-- Button trigger modal -->
@@ -63,7 +68,7 @@
          <% }%>
     <% } %>
     <% }else{ %>
-      <p>No tienes tareas Pendientes</p>
+      <p>No tienes tareas pendientes</p>
       <% } %>
   </article>
    
@@ -76,7 +81,7 @@
       <% } %>
  <% } %>
  <% }else{ %>
-  <p>No tienes tareas en Proceso</p>
+  <p>No tienes tareas en proceso</p>
   <% } %>
    </article>
 

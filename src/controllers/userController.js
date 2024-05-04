@@ -37,8 +37,7 @@ module.exports = {
             return res.render("register")            
     },
 
-    login: (req,res)=>{
-      console.log(req.session)
+    login: (req,res)=>{      
       return res.render('login')
     },
 
@@ -71,7 +70,7 @@ module.exports = {
       return res.render('login',{
         errors:{
           email:{
-            msg : "No se enceuntra el mail en la base de datos"
+            msg : "No se encuentra el mail en la base de datos"
           }
         }
       })
