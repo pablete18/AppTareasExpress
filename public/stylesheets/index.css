@@ -2,15 +2,13 @@
     background-color: var(--colorFondo);
 }
 
-.body__div__h1{
-    display: flex;
-    justify-content: center;
-    font-family: var(--fuente1);
-    margin-top: 10px;
-    box-shadow: inset;
-}
 p{
     font-size: 20px;
+}
+h4{
+    margin-left: 145px;
+    text-align: left;
+    font-size: 25px
 }
 h5{
     text-align: left;

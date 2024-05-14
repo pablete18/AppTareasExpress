@@ -1,0 +1,67 @@
+.body_div{
+    margin: 30px auto;
+    background-color: var(--colorFondo);
+    
+}
+h2{ 
+    padding: 10px;
+    text-align: center;
+    border-bottom: 15px;
+    border-color: black;
+}
+h3{
+    font-family: "lemon-jelly";
+    text-align: center;
+    padding:10px;
+}
+.login_form{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    justify-content: center;
+    text-align: center;
+    font-style: var(--fuente2);
+    color: black;
+}
+.login_form form{
+    display: flex;
+    flex-direction: column;
+}
+.login_form input{
+    margin: 10px 200px;
+    padding: 5px;
+    background-color: var(--colorFondoClaro);
+    border-color: var(--colorFondoOscuro);
+}
+button{
+    margin: 10px 200px;
+    padding: 5px;
+    background-color: var(--colorFondoOscuro);
+    border-radius: 5px;
+    font-size: 20px;
+}
+.to-register{
+    border-bottom: 5px;
+    border-color: var(--colorFondoOscuro);
+    font-size: 15px;
+    padding: 10px;
+}
+.login_form label{
+    font-size: 25px;
+}
+.animated-title {
+    position: relative;
+    animation: slideIn 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}

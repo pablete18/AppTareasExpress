@@ -1,0 +1,36 @@
+.body_div_register{
+    margin: 30px auto;
+    background-color: var(--colorFondo);
+}
+h2{
+    padding: 10px;
+    text-align: center;
+    font-family: var(--fuente3);
+}
+.form_register{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    justify-content: center;
+    text-align: center;
+    font-style: var(--fuente2);
+    color: black;
+    font-size: 25px;
+}
+.form_register form{
+    display: flex;
+    flex-direction: column;
+}
+.form_register input{
+    margin: 10px 200px;
+    padding: 5px;
+    background-color: var(--colorFondoClaro);
+    border-color: var(--colorFondoOscuro);
+}
+button{
+    margin: 15px 200px;
+    padding: 10px;
+    background-color: var(--colorFondoOscuro);
+    border-radius: 5px;
+    font-size: 20px;
+}

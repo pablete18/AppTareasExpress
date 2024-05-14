@@ -3,10 +3,10 @@
 <%- include('partials/head' ,{
     title : 'register'
 } )%>
-<body>
+<body class="body_div_register">
     <h2>Registrate</h2>
     <div>
-        <form action="/register" method="POST">
+        <form class="form_register" action="/register" method="POST">
             <label for="name">Nombre</label>
             <input type="text" name ="name" value="<%=locals.old &&(old.name)%>">
             <label for="surname">Apellido</label>
