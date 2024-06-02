@@ -9,21 +9,31 @@ module.exports = {
                 where :{
                      id : req.params.id
                 },
-                attibutes : {
-                     exclude : ['createdAt','updatedAt']
+                attributes : {
+                     exclude : ["createdAt","updatedAt"]
                 },
                 include : [
                 {
                  model: db.Task,
-                 as : 'tasks'
+                 as : 'tasks',
+                 attributes : {
+                    exclude : ['userId','createdAt','updatedAt']
+                 }
+                 
                 }
                 ]})
-            const total = await db.User.count()
+            const totalUsers = await db.User.count()
+            const statuses = await db.Status.findAll({
+                attributes : {
+                    exclude : ['createdAt','updatedAt']
+                }
+            })
 
             return res.status(200).json({
             ok : true,
-            meta : {total},
-            data : user
+            meta : {totalUsers},
+            data : user,
+            statusName : statuses
 
         })
             

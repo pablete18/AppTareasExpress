@@ -58,7 +58,6 @@ module.exports = {
                 where : {
                     id : req.session.userLogged.id
                 }})
-                console.log(user.id)
             if(errors.isEmpty()){
                 const {name,status}= req.body
             
